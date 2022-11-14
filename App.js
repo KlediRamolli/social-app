@@ -1,20 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Box, NativeBaseProvider, Text } from "native-base";
+import { useFonts } from "expo-font";
+import { Provider } from "react-redux";
 
+import theme from "./src/theme";
+import { store } from "./store";
+import { auth } from "./firebase-config";
+import AppContainer from "./AppContainer";
+
+console.log(auth);
 export default function App() {
+  const [loaded] = useFonts({
+    InterBold: require("./assets/fonts/Inter-Bold.ttf"),
+    InterSemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),
+    InterMedium: require("./assets/fonts/Inter-Medium.ttf"),
+    InterRegular: require("./assets/fonts/Inter-Regular.ttf"),
+    InterLight: require("./assets/fonts/Inter-Light.ttf"),
+  });
+  if (!loaded) return null;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider theme={theme}>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
