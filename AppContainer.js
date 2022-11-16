@@ -2,7 +2,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 
-import Home from "./src/screens/Main/Home";
+import Home from "./src/screens/Main/HomeScreens/Home";
 import Login from "./src/screens/Auth/Login";
 import Signup from "./src/screens/Auth/Signup";
 import { auth } from "./firebase-config";
@@ -18,9 +18,9 @@ const AppContainer = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: true, headerStyle: { height: 55 } }}
-        initialRouteName={"Login"}
+        initialRouteName={"Tab"}
       >
-        {!isSignedIn ? (
+        {isSignedIn ? (
           <>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
